@@ -23,3 +23,6 @@ tinymce.init({
 
 
 Inspired by [tinymce-chatgpt-plugin](https://github.com/The-3Labs-Team/tinymce-chatgpt-plugin)
+
+### Upcoming features:
+- [ ] Dropdown list of usefull / common prompts
