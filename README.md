@@ -6,7 +6,7 @@ Custom tinymce plugin to write, edit, format and style text.
 ```ts
 // add this to your existing init function
 tinymce.init({
-  contextmenu: 'vyai',
+  contextmenu: 'vyai', // optional: this will trigger the plugin on right click
   external_plugins: {
     vyai: 'https://cdn.jsdelivr.net/gh/dwrth/tinymce-vyai@latest/vyai.js',
   },
