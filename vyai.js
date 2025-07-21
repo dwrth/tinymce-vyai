@@ -306,7 +306,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
   predicate: (node) => !editor.selection.isCollapsed(),
   position: 'selection',
   scope: 'node',
-  items: ['vyai'],
+  items: [{ items: ['vyai'] }],
  });
 
  /* Return the metadata for the help plugin */
