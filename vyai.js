@@ -450,7 +450,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
 
  editor.ui.registry.addButton('vyai', {
   icon: 'vyai',
-  tooltip: editor.translate('Edit with vyAI'), // updated tooltip
+  tooltip: editor.translate('Edit with vyAI'),
   onAction: function () {
    openPromptDialog();
   },
@@ -460,7 +460,6 @@ tinymce.PluginManager.add('vyai', function (editor) {
  editor.ui.registry.addMenuItem('vyai', {
   text: editor.translate('vyAI'),
   onAction: function () {
-   /* Open window */
    openPromptDialog();
   },
  });
@@ -496,7 +495,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
     {
      role: 'system',
      content:
-      'The response should preserve any HTML formatting, links, and styles in the context. When editing HTML, never wrap the content in new divs. Only modify the existing structure as needed.',
+      'The response should preserve any HTML formatting, links, and styles in the context. When editing HTML, never wrap the content in new divs. Only modify the existing structure as needed. If asked to remove a border or change a style, edit the style of the outermost element directly, do not add a new wrapper. Return only the modified HTML, not a new wrapper.',
     },
     {
      role: 'system',
