@@ -279,18 +279,15 @@ tinymce.PluginManager.add('vyai', function (editor) {
   });
  }
 
- /* Add a vyAI icon */
  editor.ui.registry.addIcon(
   'vyai',
   '<img src="https://cdn.jsdelivr.net/gh/dwrth/tinymce-vyai/icons8-chatbot-64.png" alt="vyAI" style="width: 20px; height: 20px;" />'
  );
 
- /* Add a button that opens a window */
  editor.ui.registry.addButton('vyai', {
   icon: 'vyai',
-  tooltip: editor.translate('vyAI'),
+  tooltip: editor.translate('Edit with vyAI'), // updated tooltip
   onAction: function () {
-   /* Open window */
    openDialog();
   },
  });
@@ -309,7 +306,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
   predicate: (node) => !editor.selection.isCollapsed(),
   position: 'selection',
   scope: 'node',
-  items: [{ label: editor.translate('Edit with vyAI'), items: ['vyai'] }],
+  items: ['vyai'],
  });
 
  /* Return the metadata for the help plugin */
