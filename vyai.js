@@ -232,7 +232,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
   const baseUri = VYAI.baseUri || 'https://api.openai.com/v1/chat/completions';
 
   const requestBody = {
-   model: VYAI.model || 'gpt-3.5-turbo',
+   model: VYAI.model || 'gpt-4o-mini',
    messages: [
     {
      role: 'system',
