@@ -317,7 +317,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
   getMetadata: function () {
    return {
     name: 'TinyMCE vyAI Plugin',
-    url: 'https://github.com/dwrth',
+    url: 'https://github.com/dwrth/tinymce-vyai',
    };
   },
  };
