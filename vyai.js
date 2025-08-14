@@ -168,7 +168,9 @@ tinymce.PluginManager.add('vyai', function (editor) {
       type: 'htmlpanel',
       html:
        '<div style="margin-top: 10px; font-size: 12px; color: #666;">' +
-       editor.translate('Selected text will be used as context') +
+       editor.translate(
+        'Attention: AI can generate incorrect or fabricated content. Please critically review all results.'
+       ) +
        '</div>',
      },
     ],

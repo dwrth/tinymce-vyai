@@ -88,4 +88,6 @@ tinymce.addI18n('de', {
  'Make it SEO-friendly': 'SEO-freundlich umschreiben',
  'Rewrite the selected text to be more SEO-friendly.':
   'Den ausgewählten Text SEO-freundlich umschreiben.',
+ 'Attention: AI can generate incorrect or fabricated content. Please critically review all results.':
+  'Achtung: KI kann fehlerhafte oder erfundene Inhalte erzeugen. Bitte prüfen Sie alle Ergebnisse kritisch.',
 });

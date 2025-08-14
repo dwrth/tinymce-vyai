@@ -87,4 +87,6 @@ tinymce.addI18n('fr', {
  'Make it SEO-friendly': 'Optimiser pour le SEO',
  'Rewrite the selected text to be more SEO-friendly.':
   'Réécrivez le texte sélectionné pour l’optimiser pour le SEO.',
+ 'Attention: AI can generate incorrect or fabricated content. Please critically review all results.':
+  'Attention: AI peut générer du contenu incorrect ou fabriqué. Veuillez examiner tous les résultats avec attention.',
 });
