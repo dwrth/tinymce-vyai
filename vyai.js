@@ -479,7 +479,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
   * @param prompt
   * @returns {Promise<Response>}
   */
- function getResponseFromOpenAI(prompt, input) {
+ async function getResponseFromOpenAI(prompt, input) {
   const baseUri = VYAI.baseUri || 'https://api.openai.com/v1/chat/completions';
 
   const requestBody = {
@@ -525,6 +525,8 @@ tinymce.PluginManager.add('vyai', function (editor) {
    stream: false,
    top_p: 1,
   };
+
+  if (VYAI.customFetch) return await VYAI.customFetch(requestBody);
 
   return fetch(baseUri, {
    method: 'POST',
