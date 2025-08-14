@@ -197,7 +197,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
      editor.windowManager.alert(editor.translate('Please enter a prompt.'));
      return;
     }
-    if (!VYAI || !VYAI.api_key) {
+    if (!VYAI || (!VYAI.api_key && !VYAI.customFetch)) {
      editor.windowManager.alert(
       editor.translate(
        'vyAI configuration is missing. Please check your setup.'
