@@ -103,9 +103,10 @@ tinymce.PluginManager.add('vyai', function (editor) {
 
   getResponseFromOpenAI(currentPrompt, currentInput)
    .then((res) => {
-    if (!res.ok) {
+    if (!res.ok && !VYAI.customFetch) {
      throw new Error(`API request failed with status ${res.status}`);
     }
+    if (VYAI.customFetch) return res;
     return res.json();
    })
    .then((data) => {
@@ -211,6 +212,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
       if (!res.ok && !VYAI.customFetch) {
        throw new Error(`API request failed with status ${res.status}`);
       }
+      if (VYAI.customFetch) return res;
       return res.json();
      })
      .then((data) => {
