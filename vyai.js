@@ -518,6 +518,12 @@ tinymce.PluginManager.add('vyai', function (editor) {
    ],
    temperature: VYAI.temperature || 0.7,
    max_tokens: VYAI.max_tokens || 1000,
+   frequency_penalty: 0,
+   logprobs: false,
+   presence_penalty: 0,
+   response_format: { type: 'text' },
+   stream: false,
+   top_p: 1,
   };
 
   return fetch(baseUri, {
