@@ -208,7 +208,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
     api.block(editor.translate('Generating...'));
     getResponseFromOpenAI(currentPrompt, currentInput)
      .then((res) => {
-      if (!res.ok) {
+      if (!res.ok && !VYAI.customFetch) {
        throw new Error(`API request failed with status ${res.status}`);
       }
       return res.json();
