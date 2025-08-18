@@ -28,7 +28,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
                     ${currentInput}
                   </div>
                 </div>`
-                  : null
+                  : ''
                 }
                 <div style="margin-bottom: 15px;">
                   <strong>${editor.translate('Prompt:')}</strong>
