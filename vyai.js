@@ -20,12 +20,16 @@ tinymce.PluginManager.add('vyai', function (editor) {
      {
       type: 'htmlpanel',
       html: `
-                <div style="margin-bottom: 15px;">
+                ${
+                 currentInput
+                  ? `<div style="margin-bottom: 15px;">
                   <strong>${editor.translate('Original Input:')}</strong>
                   <div style="background: #f5f5f5; padding: 10px; border-radius: 4px; margin-top: 5px; max-height: 100px; overflow-y: auto; font-size: 12px;">
-                    ${currentInput || editor.translate('No text selected')}
+                    ${currentInput}
                   </div>
-                </div>
+                </div>`
+                  : null
+                }
                 <div style="margin-bottom: 15px;">
                   <strong>${editor.translate('Prompt:')}</strong>
                   <div style="background: #f5f5f5; padding: 10px; border-radius: 4px; margin-top: 5px; font-size: 12px;">
