@@ -502,10 +502,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
   tooltip: disabled
    ? VYAI.tooltipDisabled ?? editor.translate('vyAI is disabled')
    : editor.translate('Common vyAI Prompts'),
-  disabled: true,
-  onSetup: function (api) {
-   api.setDisabled(disabled);
-  },
+  disabled: disabled,
   fetch: function (callback) {
    callback(COMMON_PROMPTS);
   },
@@ -516,10 +513,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
   tooltip: disabled
    ? VYAI.tooltipDisabled ?? editor.translate('vyAI is disabled')
    : editor.translate('Edit with vyAI'),
-  disabled: true,
-  onSetup: function (api) {
-   api.setDisabled(disabled);
-  },
+  disabled: disabled,
   onAction: function () {
    openPromptDialog();
   },
@@ -527,6 +521,10 @@ tinymce.PluginManager.add('vyai', function (editor) {
 
  editor.ui.registry.addMenuItem('vyai', {
   text: editor.translate('vyAI'),
+  tooltip: disabled
+   ? VYAI.tooltipDisabled ?? editor.translate('vyAI is disabled')
+   : editor.translate('Edit with vyAI'),
+  disabled: disabled,
   onAction: function () {
    openPromptDialog();
   },
