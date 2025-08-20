@@ -507,7 +507,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
    callback(COMMON_PROMPTS);
   },
   onSetup: (api) => {
-   api.setDisabled(disabled);
+   api.setEnabled(!disabled);
   },
  });
 
@@ -521,8 +521,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
    openPromptDialog();
   },
   onSetup: (api) => {
-   console.log(api);
-   //  api.setDisabled(disabled);
+   api.setEnabled(!disabled);
   },
  });
 
@@ -536,7 +535,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
    openPromptDialog();
   },
   onSetup: (api) => {
-   api.setDisabled(disabled);
+   api.setEnabled(!disabled);
   },
  });
 
