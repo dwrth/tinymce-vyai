@@ -521,7 +521,8 @@ tinymce.PluginManager.add('vyai', function (editor) {
    openPromptDialog();
   },
   onSetup: (api) => {
-   api.setDisabled(disabled);
+   console.log(api);
+   //  api.setDisabled(disabled);
   },
  });
 
