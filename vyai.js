@@ -506,6 +506,9 @@ tinymce.PluginManager.add('vyai', function (editor) {
   fetch: function (callback) {
    callback(COMMON_PROMPTS);
   },
+  onSetup: (api) => {
+   api.setDisabled(disabled);
+  },
  });
 
  editor.ui.registry.addButton('vyai', {
@@ -517,6 +520,9 @@ tinymce.PluginManager.add('vyai', function (editor) {
   onAction: function () {
    openPromptDialog();
   },
+  onSetup: (api) => {
+   api.setDisabled(disabled);
+  },
  });
 
  editor.ui.registry.addMenuItem('vyai', {
@@ -527,6 +533,9 @@ tinymce.PluginManager.add('vyai', function (editor) {
   disabled: disabled,
   onAction: function () {
    openPromptDialog();
+  },
+  onSetup: (api) => {
+   api.setDisabled(disabled);
   },
  });
 
