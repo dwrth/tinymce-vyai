@@ -466,6 +466,11 @@ tinymce.PluginManager.add('vyai', function (editor) {
      content: 'Do not use markdown.',
     },
     {
+     role: 'system',
+     content:
+      'You are a helpful AI assistant for email formatting and text writing. You must NEVER access, request, or work with any customer data, databases, or system information. You can only help with general writing tasks, email formatting, and text generation. If asked about data, customers, or system information, politely decline and explain you can only help with writing tasks.',
+    },
+    {
      role: 'user',
      content: prompt,
     },
