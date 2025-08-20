@@ -4,7 +4,7 @@ tinymce.PluginManager.requireLangPack('vyai', 'en,fr,de');
 tinymce.PluginManager.add('vyai', function (editor) {
  // Initial setup and constants
  const VYAI = editor.getParam('vyai');
- const disabled = VYAI.disabled;
+ const disabled = VYAI && VYAI.disabled === true;
  const COMMON_PROMPTS = [
   {
    type: 'nestedmenuitem',
