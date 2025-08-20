@@ -89,4 +89,5 @@ tinymce.addI18n('fr', {
   'Réécrivez le texte sélectionné pour l’optimiser pour le SEO.',
  'Attention: AI can generate incorrect or fabricated content. Please critically review all results.':
   'Attention: AI peut générer du contenu incorrect ou fabriqué. Veuillez examiner tous les résultats avec attention.',
+ 'vyAI is disabled': 'vyAI est désactivé',
 });

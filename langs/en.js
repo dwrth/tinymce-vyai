@@ -89,4 +89,5 @@ tinymce.addI18n('en', {
   'Rewrite the selected text to be more SEO-friendly.',
  'Attention: AI can generate incorrect or fabricated content. Please critically review all results.':
   'Attention: AI can generate incorrect or fabricated content. Please critically review all results.',
+ 'vyAI is disabled': 'vyAI is disabled',
 });

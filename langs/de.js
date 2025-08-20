@@ -90,4 +90,5 @@ tinymce.addI18n('de', {
   'Den ausgewählten Text SEO-freundlich umschreiben.',
  'Attention: AI can generate incorrect or fabricated content. Please critically review all results.':
   'Achtung: KI kann fehlerhafte oder erfundene Inhalte erzeugen. Bitte prüfen Sie alle Ergebnisse kritisch.',
+ 'vyAI is disabled': 'vyAI ist deaktiviert',
 });
