@@ -4,7 +4,7 @@ tinymce.PluginManager.requireLangPack('vyai', 'en,fr,de');
 tinymce.PluginManager.add('vyai', function (editor) {
  // Initial setup and constants
  const VYAI = editor.getParam('vyai');
- const disabled = VYAI.disabled ?? false;
+ const disabled = VYAI.disabled;
  const COMMON_PROMPTS = [
   {
    type: 'nestedmenuitem',
@@ -503,6 +503,9 @@ tinymce.PluginManager.add('vyai', function (editor) {
    ? VYAI.tooltipDisabled ?? editor.translate('vyAI is disabled')
    : editor.translate('Common vyAI Prompts'),
   disabled: true,
+  onSetup: function (api) {
+   api.setDisabled(disabled);
+  },
   fetch: function (callback) {
    callback(COMMON_PROMPTS);
   },
@@ -514,6 +517,9 @@ tinymce.PluginManager.add('vyai', function (editor) {
    ? VYAI.tooltipDisabled ?? editor.translate('vyAI is disabled')
    : editor.translate('Edit with vyAI'),
   disabled: true,
+  onSetup: function (api) {
+   api.setDisabled(disabled);
+  },
   onAction: function () {
    openPromptDialog();
   },
