@@ -502,7 +502,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
   tooltip: disabled
    ? VYAI.tooltipDisabled ?? editor.translate('vyAI is disabled')
    : editor.translate('Common vyAI Prompts'),
-  disabled: disabled,
+  disabled: true,
   fetch: function (callback) {
    callback(COMMON_PROMPTS);
   },
@@ -513,7 +513,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
   tooltip: disabled
    ? VYAI.tooltipDisabled ?? editor.translate('vyAI is disabled')
    : editor.translate('Edit with vyAI'),
-  disabled: disabled,
+  disabled: true,
   onAction: function () {
    openPromptDialog();
   },
