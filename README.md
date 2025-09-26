@@ -93,11 +93,36 @@ tinymce.init({
   baseUri: 'https://api.openai.com/v1/chat/completions',
   customFetch: null, // Custom fetch function for advanced use cases
   disabled: false, // Disable the plugin
+  assistantName: 'vyAI', // Customize the assistant name in UI
   tooltipDisabled: 'vyAI is currently disabled',
   prompts: ['Custom prompt 1', 'Custom prompt 2'], // Custom prompt suggestions
  },
 });
 ```
+
+### Customizing the Assistant Name
+
+You can customize the assistant name that appears in the UI by setting the `assistantName` option:
+
+```javascript
+tinymce.init({
+ selector: '#editor',
+ plugins: 'vyai',
+ external_plugins: {
+  vyai: 'path/to/vyai.js',
+ },
+ vyai: {
+  api_key: 'your-openai-api-key',
+  assistantName: 'MyAI Assistant', // Custom name for the assistant
+ },
+});
+```
+
+This will update all UI elements including:
+
+- Dialog titles (e.g., "MyAI Assistant - Generate Content")
+- Button tooltips (e.g., "Edit with MyAI Assistant")
+- Menu items and error messages
 
 ### UI Elements
 
@@ -110,16 +135,17 @@ The plugin adds several UI elements to your editor:
 
 ## 🔧 Configuration Options
 
-| Option        | Type     | Default       | Description                 |
-| ------------- | -------- | ------------- | --------------------------- |
-| `api_key`     | string   | required      | Your OpenAI API key         |
-| `model`       | string   | 'gpt-4o-mini' | OpenAI model to use         |
-| `temperature` | number   | 0.7           | Creativity level (0-1)      |
-| `max_tokens`  | number   | 1000          | Maximum response length     |
-| `baseUri`     | string   | OpenAI API    | Custom API endpoint         |
-| `customFetch` | function | null          | Custom fetch implementation |
-| `disabled`    | boolean  | false         | Disable the plugin          |
-| `prompts`     | array    | []            | Custom prompt suggestions   |
+| Option          | Type     | Default       | Description                        |
+| --------------- | -------- | ------------- | ---------------------------------- |
+| `api_key`       | string   | required      | Your OpenAI API key                |
+| `model`         | string   | 'gpt-4o-mini' | OpenAI model to use                |
+| `temperature`   | number   | 0.7           | Creativity level (0-1)             |
+| `max_tokens`    | number   | 1000          | Maximum response length            |
+| `baseUri`       | string   | OpenAI API    | Custom API endpoint                |
+| `customFetch`   | function | null          | Custom fetch implementation        |
+| `disabled`      | boolean  | false         | Disable the plugin                 |
+| `assistantName` | string   | 'vyAI'        | Customize the assistant name in UI |
+| `prompts`       | array    | []            | Custom prompt suggestions          |
 
 ## 🌍 Internationalization
 

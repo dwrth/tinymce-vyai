@@ -5,6 +5,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
  // Initial setup and constants
  const VYAI = editor.getParam('vyai');
  const disabled = VYAI && VYAI.disabled === true;
+ const assistantName = VYAI?.assistantName || 'vyAI';
  const COMMON_PROMPTS = [
   {
    type: 'nestedmenuitem',
@@ -214,7 +215,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
   insertContent
  ) {
   return editor.windowManager.open({
-   title: editor.translate('vyAI - Generated Content'),
+   title: assistantName + ' - ' + editor.translate('Generated Content'),
    body: {
     type: 'panel',
     items: [
@@ -290,7 +291,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
   insertContent
  ) {
   const retryDialog = editor.windowManager.open({
-   title: editor.translate('vyAI - Regenerating Content'),
+   title: assistantName + ' - ' + editor.translate('Regenerating Content'),
    body: {
     type: 'panel',
     items: [
@@ -349,7 +350,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
   currentResult = '';
 
   editor.windowManager.open({
-   title: editor.translate('vyAI - Generate Content'),
+   title: assistantName + ' - ' + editor.translate('Generate Content'),
    body: {
     type: 'panel',
     items: [
@@ -395,9 +396,9 @@ tinymce.PluginManager.add('vyai', function (editor) {
     }
     if (!VYAI || (!VYAI.api_key && !VYAI.customFetch)) {
      editor.windowManager.alert(
-      editor.translate(
-       'vyAI configuration is missing. Please check your setup.'
-      )
+      assistantName +
+       ' ' +
+       editor.translate('configuration is missing. Please check your setup.')
      );
      return;
     }
@@ -505,8 +506,13 @@ tinymce.PluginManager.add('vyai', function (editor) {
  editor.ui.registry.addMenuButton('vyai_prompts', {
   icon: 'ai-prompt',
   tooltip: disabled
-   ? VYAI.tooltipDisabled ?? editor.translate('vyAI is disabled')
-   : editor.translate('Common vyAI Prompts'),
+   ? VYAI.tooltipDisabled ??
+     assistantName + ' ' + editor.translate('is disabled')
+   : editor.translate('Common') +
+     ' ' +
+     assistantName +
+     ' ' +
+     editor.translate('Prompts'),
   disabled: disabled,
   fetch: function (callback) {
    callback(COMMON_PROMPTS);
@@ -519,8 +525,9 @@ tinymce.PluginManager.add('vyai', function (editor) {
  editor.ui.registry.addButton('vyai', {
   icon: 'ai',
   tooltip: disabled
-   ? VYAI.tooltipDisabled ?? editor.translate('vyAI is disabled')
-   : editor.translate('Edit with vyAI'),
+   ? VYAI.tooltipDisabled ??
+     assistantName + ' ' + editor.translate('is disabled')
+   : editor.translate('Edit with') + ' ' + assistantName,
   disabled: disabled,
   onAction: function () {
    openPromptDialog();
@@ -531,10 +538,11 @@ tinymce.PluginManager.add('vyai', function (editor) {
  });
 
  editor.ui.registry.addMenuItem('vyai', {
-  text: editor.translate('vyAI'),
+  text: assistantName,
   tooltip: disabled
-   ? VYAI.tooltipDisabled ?? editor.translate('vyAI is disabled')
-   : editor.translate('Edit with vyAI'),
+   ? VYAI.tooltipDisabled ??
+     assistantName + ' ' + editor.translate('is disabled')
+   : editor.translate('Edit with') + ' ' + assistantName,
   disabled: disabled,
   onAction: function () {
    openPromptDialog();
@@ -554,7 +562,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
  return {
   getMetadata: function () {
    return {
-    name: 'TinyMCE vyAI Plugin',
+    name: 'TinyMCE AI Plugin',
     url: 'https://github.com/dwrth/tinymce-vyai',
    };
   },

@@ -1,5 +1,5 @@
 tinymce.addI18n('en', {
- 'vyAI - Generate Content': 'vyAI - Generate Content',
+ 'Generate Content': 'Generate Content',
  'Provide your input here': 'Provide your input here',
  'Enter your prompt or instruction...': 'Enter your prompt or instruction...',
  'Selected text will be used as context':
@@ -7,23 +7,22 @@ tinymce.addI18n('en', {
  Cancel: 'Cancel',
  Generate: 'Generate',
  'Please enter a prompt.': 'Please enter a prompt.',
- 'vyAI configuration is missing. Please check your setup.':
-  'vyAI configuration is missing. Please check your setup.',
+ 'configuration is missing. Please check your setup.':
+  'configuration is missing. Please check your setup.',
  'Generating...': 'Generating...',
  'Error generating content: ': 'Error generating content: ',
- 'vyAI - Generated Content': 'vyAI - Generated Content',
+ 'Generated Content': 'Generated Content',
  'Original Input:': 'Original Input:',
  'No text selected': 'No text selected',
  'Prompt:': 'Prompt:',
  'Generated Result:': 'Generated Result:',
  Retry: 'Retry',
  'Apply Changes': 'Apply Changes',
- 'vyAI - Regenerating Content': 'vyAI - Regenerating Content',
+ 'Regenerating Content': 'Regenerating Content',
  'Regenerating content with the same prompt...':
   'Regenerating content with the same prompt...',
  'Error regenerating content: ': 'Error regenerating content: ',
- vyAI: 'vyAI',
- 'Edit with vyAI': 'Edit with vyAI',
+ 'Edit with': 'Edit with',
  'Change Tone': 'Change Tone',
  Extend: 'Extend',
  Summarize: 'Summarize',
@@ -89,5 +88,7 @@ tinymce.addI18n('en', {
   'Rewrite the selected text to be more SEO-friendly.',
  'Attention: AI can generate incorrect or fabricated content. Please critically review all results.':
   'Attention: AI can generate incorrect or fabricated content. Please critically review all results.',
- 'vyAI is disabled': 'vyAI is disabled',
+ 'is disabled': 'is disabled',
+ Common: 'Common',
+ Prompts: 'Prompts',
 });

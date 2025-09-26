@@ -1,5 +1,5 @@
 tinymce.addI18n('fr', {
- 'vyAI - Generate Content': 'vyAI - Générer du contenu',
+ 'Generate Content': 'Générer du contenu',
  'Provide your input here': 'Fournissez votre saisie ici',
  'Enter your prompt or instruction...': 'Entrez votre prompt ou instruction...',
  'Selected text will be used as context':
@@ -7,23 +7,22 @@ tinymce.addI18n('fr', {
  Cancel: 'Annuler',
  Generate: 'Générer',
  'Please enter a prompt.': 'Veuillez entrer un prompt.',
- 'vyAI configuration is missing. Please check your setup.':
-  'La configuration vyAI est manquante. Veuillez vérifier votre configuration.',
+ 'configuration is missing. Please check your setup.':
+  'La configuration est manquante. Veuillez vérifier votre configuration.',
  'Generating...': 'Génération...',
  'Error generating content: ': 'Erreur lors de la génération du contenu : ',
- 'vyAI - Generated Content': 'vyAI - Contenu généré',
+ 'Generated Content': 'Contenu généré',
  'Original Input:': 'Saisie originale :',
  'No text selected': 'Aucun texte sélectionné',
  'Prompt:': 'Prompt :',
  'Generated Result:': 'Résultat généré :',
  Retry: 'Réessayer',
  'Apply Changes': 'Appliquer les modifications',
- 'vyAI - Regenerating Content': 'vyAI - Régénération du contenu',
+ 'Regenerating Content': 'Régénération du contenu',
  'Regenerating content with the same prompt...':
   'Régénération du contenu avec le même prompt...',
  'Error regenerating content: ': 'Erreur lors de la régénération du contenu : ',
- vyAI: 'vyAI',
- 'Edit with vyAI': 'Modifier avec vyAI',
+ 'Edit with': 'Modifier avec',
  'Change Tone': 'Changer le ton',
  Extend: 'Allonger',
  Summarize: 'Résumer',
@@ -89,5 +88,7 @@ tinymce.addI18n('fr', {
   'Réécrivez le texte sélectionné pour l’optimiser pour le SEO.',
  'Attention: AI can generate incorrect or fabricated content. Please critically review all results.':
   'Attention: AI peut générer du contenu incorrect ou fabriqué. Veuillez examiner tous les résultats avec attention.',
- 'vyAI is disabled': 'vyAI est désactivé',
+ 'is disabled': 'est désactivé',
+ Common: 'Commun',
+ Prompts: 'Prompts',
 });
