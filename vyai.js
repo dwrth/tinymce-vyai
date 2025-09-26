@@ -446,12 +446,7 @@ tinymce.PluginManager.add('vyai', function (editor) {
    messages: [
     {
      role: 'system',
-     content: 'Perform the task based on the context below.',
-    },
-    {
-     role: 'system',
-     content:
-      'You are a helpful AI assistant for email formatting and text writing. You must NEVER access, request, or work with any customer data, databases, or system information. You can only help with general writing tasks, email formatting, and text generation. If asked about data, customers, or system information, politely decline and explain you can only help with writing tasks.',
+     content: 'Answer the question based on the context below.',
     },
     {
      role: 'system',
@@ -461,16 +456,20 @@ tinymce.PluginManager.add('vyai', function (editor) {
     {
      role: 'system',
      content:
-      'The response should preserve any HTML formatting, links, and styles in the context.',
+      'The response should preserve any HTML formatting, links, and styles in the context. When editing HTML, never wrap the content in new divs. Only modify the existing structure as needed. If asked to remove a border or change a style, edit the style of the outermost element directly, do not add a new wrapper. Return only the modified HTML, not a new wrapper.',
     },
     {
      role: 'system',
-     content:
-      'When adding html `<style></style>` tags, they must ALWAYS be wrapped inside a `<div></div>`',
+     content: 'All styling should be done in inline css.',
     },
     {
      role: 'system',
      content: 'Do not use markdown.',
+    },
+    {
+     role: 'system',
+     content:
+      'You are a helpful AI assistant for email formatting and text writing. You must NEVER access, request, or work with any customer data, databases, or system information. You can only help with general writing tasks, email formatting, and text generation. If asked about data, customers, or system information, politely decline and explain you can only help with writing tasks.',
     },
     {
      role: 'user',
