@@ -34,8 +34,20 @@ A powerful TinyMCE plugin that integrates AI-powered text editing capabilities d
 
 ### CDN (Recommended)
 
-```html
-<script src="https://cdn.jsdelivr.net/gh/dwrth/tinymce-vyai@main/vyai.js"></script>
+```javascript
+tinymce.init({
+ selector: '#editor',
+ plugins: 'vyai',
+ external_plugins: {
+  vyai: 'https://cdn.jsdelivr.net/gh/dwrth/tinymce-vyai@main/vyai.js',
+ },
+ vyai: {
+  api_key: 'your-openai-api-key',
+  model: 'gpt-4o-mini',
+  temperature: 0.7,
+  max_tokens: 1000,
+ },
+});
 ```
 
 ### Manual Installation
