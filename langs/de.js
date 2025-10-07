@@ -23,7 +23,7 @@ tinymce.addI18n('de', {
  'Regenerating content with the same prompt...':
   'Generiere Inhalt mit demselben Prompt neu...',
  'Error regenerating content: ': 'Fehler beim Neu-Generieren des Inhalts: ',
- 'Edit with': 'Mit',
+ 'Edit with': 'Bearbeiten mit',
  'Change Tone': 'Ton ändern',
  Extend: 'Erweitern',
  Summarize: 'Zusammenfassen',
