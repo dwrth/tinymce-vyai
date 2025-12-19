@@ -1,6 +1,6 @@
-# tinymce-vyai
+# hugerte-vyai
 
-A powerful TinyMCE plugin that integrates AI-powered text editing capabilities directly into your editor. Write, edit, format, and style text with the help of AI using OpenAI's GPT models.
+A powerful hugerte plugin that integrates AI-powered text editing capabilities directly into your editor. Write, edit, format, and style text with the help of AI using OpenAI's GPT models.
 
 ## ✨ Features
 
@@ -35,18 +35,18 @@ A powerful TinyMCE plugin that integrates AI-powered text editing capabilities d
 ### CDN (Recommended)
 
 ```javascript
-tinymce.init({
- selector: '#editor',
- plugins: 'vyai',
- external_plugins: {
-  vyai: 'https://cdn.jsdelivr.net/gh/dwrth/tinymce-vyai@main/vyai.js',
- },
- vyai: {
-  api_key: 'your-openai-api-key',
-  model: 'gpt-4o-mini',
-  temperature: 0.7,
-  max_tokens: 1000,
- },
+hugerte.init({
+  selector: "#editor",
+  plugins: "vyai",
+  external_plugins: {
+    vyai: "https://cdn.jsdelivr.net/gh/dwrth/hugerte-vyai@main/vyai.js",
+  },
+  vyai: {
+    api_key: "your-openai-api-key",
+    model: "gpt-4o-mini",
+    temperature: 0.7,
+    max_tokens: 1000,
+  },
 });
 ```
 
@@ -59,44 +59,44 @@ Download the plugin files and include them in your project.
 ### Basic Setup
 
 ```javascript
-tinymce.init({
- selector: '#editor',
- plugins: 'vyai',
- external_plugins: {
-  vyai: 'path/to/vyai.js',
- },
- vyai: {
-  api_key: 'your-openai-api-key',
-  model: 'gpt-4o-mini',
-  temperature: 0.7,
-  max_tokens: 1000,
- },
+hugerte.init({
+  selector: "#editor",
+  plugins: "vyai",
+  external_plugins: {
+    vyai: "path/to/vyai.js",
+  },
+  vyai: {
+    api_key: "your-openai-api-key",
+    model: "gpt-4o-mini",
+    temperature: 0.7,
+    max_tokens: 1000,
+  },
 });
 ```
 
 ### Advanced Configuration
 
 ```javascript
-tinymce.init({
- selector: '#editor',
- plugins: 'vyai',
- external_plugins: {
-  vyai: 'path/to/vyai.js', // or https://cdn.jsdelivr.net/gh/dwrth/tinymce-vyai@main/vyai.js
- },
- vyai: {
-  // ⚠️ it is highly recommended to use your own endpoint together with customFetch
-  // Adding your key here will make it visible in the developer tools, even if you get it from an environment variable!
-  api_key: 'your-openai-api-key',
-  model: 'gpt-4o-mini',
-  temperature: 0.7,
-  max_tokens: 1000,
-  baseUri: 'https://api.openai.com/v1/chat/completions',
-  customFetch: null, // Custom fetch function for advanced use cases
-  disabled: false, // Disable the plugin
-  assistantName: 'vyAI', // Customize the assistant name in UI
-  tooltipDisabled: 'vyAI is currently disabled',
-  prompts: ['Custom prompt 1', 'Custom prompt 2'], // Custom prompt suggestions
- },
+hugerte.init({
+  selector: "#editor",
+  plugins: "vyai",
+  external_plugins: {
+    vyai: "path/to/vyai.js", // or https://cdn.jsdelivr.net/gh/dwrth/hugerte-vyai@main/vyai.js
+  },
+  vyai: {
+    // ⚠️ it is highly recommended to use your own endpoint together with customFetch
+    // Adding your key here will make it visible in the developer tools, even if you get it from an environment variable!
+    api_key: "your-openai-api-key",
+    model: "gpt-4o-mini",
+    temperature: 0.7,
+    max_tokens: 1000,
+    baseUri: "https://api.openai.com/v1/chat/completions",
+    customFetch: null, // Custom fetch function for advanced use cases
+    disabled: false, // Disable the plugin
+    assistantName: "vyAI", // Customize the assistant name in UI
+    tooltipDisabled: "vyAI is currently disabled",
+    prompts: ["Custom prompt 1", "Custom prompt 2"], // Custom prompt suggestions
+  },
 });
 ```
 
@@ -105,16 +105,16 @@ tinymce.init({
 You can customize the assistant name that appears in the UI by setting the `assistantName` option:
 
 ```javascript
-tinymce.init({
- selector: '#editor',
- plugins: 'vyai',
- external_plugins: {
-  vyai: 'path/to/vyai.js',
- },
- vyai: {
-  api_key: 'your-openai-api-key',
-  assistantName: 'MyAI Assistant', // Custom name for the assistant
- },
+hugerte.init({
+  selector: "#editor",
+  plugins: "vyai",
+  external_plugins: {
+    vyai: "path/to/vyai.js",
+  },
+  vyai: {
+    api_key: "your-openai-api-key",
+    assistantName: "MyAI Assistant", // Custom name for the assistant
+  },
 });
 ```
 
@@ -155,7 +155,7 @@ The plugin supports multiple languages:
 - German (de)
 - French (fr)
 
-Language files are automatically loaded based on your TinyMCE configuration.
+Language files are automatically loaded based on your hugerte configuration.
 
 ## ⚠️ Important Notes
 
