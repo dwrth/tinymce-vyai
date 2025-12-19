@@ -39,7 +39,7 @@ hugerte.init({
   selector: "#editor",
   plugins: "vyai",
   external_plugins: {
-    vyai: "https://cdn.jsdelivr.net/gh/dwrth/hugerte-vyai@main/vyai.js",
+    vyai: "https://cdn.jsdelivr.net/gh/dwrth/tinymce-vyai/tree/hugerte@main/vyai.js",
   },
   vyai: {
     api_key: "your-openai-api-key",
@@ -81,7 +81,7 @@ hugerte.init({
   selector: "#editor",
   plugins: "vyai",
   external_plugins: {
-    vyai: "path/to/vyai.js", // or https://cdn.jsdelivr.net/gh/dwrth/hugerte-vyai@main/vyai.js
+    vyai: "path/to/vyai.js", // or https://cdn.jsdelivr.net/gh/dwrth/tinymce-vyai/tree/hugerte@main/vyai.js
   },
   vyai: {
     // ⚠️ it is highly recommended to use your own endpoint together with customFetch
