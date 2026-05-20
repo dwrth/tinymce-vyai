@@ -569,7 +569,7 @@ hugerte.PluginManager.add("vyai", function (editor) {
     predicate: () => !editor.selection.isCollapsed(),
     position: "selection",
     scope: "node",
-    items: [{ items: ["vyai", "vyai_prompts"] }],
+    items: "vyai vyai_prompts",
   });
 
   return {
