@@ -2,7 +2,6 @@
 hugerte.PluginManager.requireLangPack("vyai", "en,fr,de");
 
 hugerte.PluginManager.add("vyai", function (editor) {
-  // Initial setup and constants
   const VYAI = editor.getParam("vyai");
   const disabled = VYAI && VYAI.disabled === true;
   const assistantName = VYAI?.assistantName || "vyAI";
@@ -211,7 +210,50 @@ hugerte.PluginManager.add("vyai", function (editor) {
     : [];
   PROMPTS.unshift({ text: "Custom Prompt", value: "" });
 
-  // Functions
+  async function readStreamingContent(response, onChunk) {
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || `API request failed with status ${response.status}`);
+    }
+    if (!response.body) {
+      throw new Error("Streaming response body is missing");
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    let content = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split("\n");
+      buffer = lines.pop() ?? "";
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed.startsWith("data:")) continue;
+        const payload = trimmed.slice(5).trim();
+        if (!payload || payload === "[DONE]") continue;
+
+        try {
+          const chunk = JSON.parse(payload);
+          const delta = chunk.choices?.[0]?.delta?.content;
+          if (delta) {
+            content += delta;
+            onChunk(content);
+          }
+        } catch {
+          // ignore incomplete/non-JSON SSE payloads
+        }
+      }
+    }
+
+    return content;
+  }
+
   function showResultDialog(
     currentPrompt,
     currentInput,
@@ -220,6 +262,8 @@ hugerte.PluginManager.add("vyai", function (editor) {
     handleRetry,
     insertContent
   ) {
+    let latestResult = currentResult;
+
     return editor.windowManager.open({
       title: assistantName + " - " + editor.translate("Generated Content"),
       body: {
@@ -244,15 +288,17 @@ hugerte.PluginManager.add("vyai", function (editor) {
                     ${currentPrompt}
                   </div>
                 </div>
-                <div>
-                  <strong>${editor.translate("Generated Result:")}</strong>
-                  <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin-top: 5px; max-height: 300px; overflow-y: auto; border: 1px solid #dee2e6;">
-                    ${currentResult}
-                  </div>
-                </div>
               `,
           },
+          {
+            type: "textarea",
+            name: "result",
+            label: editor.translate("Generated Result:"),
+          },
         ],
+      },
+      initialData: {
+        result: currentResult,
       },
       buttons: [
         {
@@ -271,6 +317,9 @@ hugerte.PluginManager.add("vyai", function (editor) {
           buttonType: "primary",
         },
       ],
+      onChange: function (api) {
+        latestResult = api.getData().result;
+      },
       onAction: function (api, details) {
         if (details.name === "retry") {
           api.close();
@@ -282,11 +331,59 @@ hugerte.PluginManager.add("vyai", function (editor) {
             insertContent
           );
         } else if (details.name === "apply") {
-          insertContent(currentResult);
+          insertContent(api.getData().result || latestResult);
           api.close();
         }
       },
     });
+  }
+
+  async function runGeneration(
+    currentPrompt,
+    currentInput,
+    dialogApi,
+    insertContent,
+    closeOnStart
+  ) {
+    if (closeOnStart) {
+      dialogApi.close();
+    } else {
+      dialogApi.block(editor.translate("Generating..."));
+    }
+
+    const resultDialog = showResultDialog(
+      currentPrompt,
+      currentInput,
+      "",
+      editor,
+      handleRetry,
+      insertContent
+    );
+
+    try {
+      const response = await getResponseFromOpenAI(currentPrompt, currentInput);
+      const content = await readStreamingContent(response, (partial) => {
+        resultDialog.setData({ result: partial });
+      });
+
+      if (!content) {
+        throw new Error("Invalid response format from API");
+      }
+
+      resultDialog.setData({ result: content });
+      if (!closeOnStart) {
+        dialogApi.unblock();
+      }
+    } catch (error) {
+      console.error("Error in API call:", error);
+      resultDialog.close();
+      if (!closeOnStart) {
+        dialogApi.unblock();
+      }
+      editor.windowManager.alert(
+        editor.translate("Error generating content: ") + error.message
+      );
+    }
   }
 
   function handleRetry(
@@ -313,48 +410,16 @@ hugerte.PluginManager.add("vyai", function (editor) {
       buttons: [],
     });
 
-    getResponseFromOpenAI(currentPrompt, currentInput)
-      .then((res) => {
-        if (!res.ok && !VYAI.customFetch) {
-          throw new Error(`API request failed with status ${res.status}`);
-        }
-        if (VYAI.customFetch) return res;
-        return res.json();
-      })
-      .then((data) => {
-        if (data.choices && data.choices[0] && data.choices[0].message) {
-          const currentResult = data.choices[0].message.content;
-          retryDialog.close();
-          showResultDialog(
-            currentPrompt,
-            currentInput,
-            currentResult,
-            editor,
-            handleRetry,
-            insertContent
-          );
-        } else {
-          throw new Error("Invalid response format from API");
-        }
-      })
-      .catch((error) => {
-        console.error("Error in retry API call:", error);
-        retryDialog.close();
-        editor.windowManager.alert(
-          editor.translate("Error regenerating content: ") + error.message
-        );
-      });
+    runGeneration(
+      currentPrompt,
+      currentInput,
+      retryDialog,
+      insertContent,
+      true
+    );
   }
 
-  let currentPrompt = "";
-  let currentInput = "";
-  let currentResult = "";
-
   function openPromptDialog(presetPrompt = "") {
-    currentPrompt = presetPrompt;
-    currentInput = hugerte.activeEditor?.selection.getContent() || "";
-    currentResult = "";
-
     editor.windowManager.open({
       title: assistantName + " - " + editor.translate("Generate Content"),
       body: {
@@ -396,8 +461,9 @@ hugerte.PluginManager.add("vyai", function (editor) {
       },
       onSubmit: function (api) {
         const data = api.getData();
-        currentPrompt = data.prompt;
-        currentInput = hugerte.activeEditor?.selection.getContent() || "";
+        const currentPrompt = data.prompt;
+        const currentInput = hugerte.activeEditor?.selection.getContent() || "";
+
         if (!currentPrompt.trim()) {
           editor.windowManager.alert(
             editor.translate("Please enter a prompt.")
@@ -414,38 +480,14 @@ hugerte.PluginManager.add("vyai", function (editor) {
           );
           return;
         }
-        api.block(editor.translate("Generating..."));
-        getResponseFromOpenAI(currentPrompt, currentInput)
-          .then((res) => {
-            if (!res.ok && !VYAI.customFetch) {
-              throw new Error(`API request failed with status ${res.status}`);
-            }
-            if (VYAI.customFetch) return res;
-            return res.json();
-          })
-          .then((data) => {
-            if (data.choices && data.choices[0] && data.choices[0].message) {
-              currentResult = data.choices[0].message.content;
-              api.close();
-              showResultDialog(
-                currentPrompt,
-                currentInput,
-                currentResult,
-                editor,
-                handleRetry,
-                (result) => editor.insertContent(result)
-              );
-            } else {
-              throw new Error("Invalid response format from API");
-            }
-          })
-          .catch((error) => {
-            console.error("Error in API call:", error);
-            api.unblock();
-            editor.windowManager.alert(
-              editor.translate("Error generating content: ") + error.message
-            );
-          });
+
+        runGeneration(
+          currentPrompt,
+          currentInput,
+          api,
+          (result) => editor.insertContent(result),
+          true
+        );
       },
     });
   }
@@ -499,7 +541,7 @@ hugerte.PluginManager.add("vyai", function (editor) {
       logprobs: false,
       presence_penalty: 0,
       response_format: { type: "text" },
-      stream: false,
+      stream: true,
       top_p: 1,
     };
 
@@ -515,7 +557,6 @@ hugerte.PluginManager.add("vyai", function (editor) {
     });
   }
 
-  // Handle editor UI
   editor.ui.registry.addMenuButton("vyai_prompts", {
     icon: "ai-prompt",
     tooltip: disabled
